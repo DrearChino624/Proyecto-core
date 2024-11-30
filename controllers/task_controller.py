@@ -10,8 +10,12 @@ task_blueprint = Blueprint('tasks', __name__)
 @task_blueprint.route('/tasks', methods=['GET'])
 @login_required
 def list_tasks():
-    tasks = Task.query.all()
+    tasks = Task.query.join(User, Task.user_id == User.id).add_columns(
+        Task.id, Task.job_id, Task.description, Task.difficulty, Task.estimatetime,
+        Task.status_id, Task.donetime, User.first_name
+    ).all()
     return render_template('task.html', tasks=tasks)
+
 
 @task_blueprint.route('/tasks/new', methods=['GET','POST'])
 def create_task():

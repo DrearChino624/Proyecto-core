@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Add New Task</h2>
-    <form action="/tasks/new" method="POST">
+    <h2 class="text-center text-danger mb-4">Add New Task</h2>
+    <form action="/tasks/new" method="POST" class="shadow-sm p-4 rounded border">
         <div class="mb-3">
             <label for="job_id" class="form-label">Job ID</label>
             <input type="text" class="form-control" id="job_id" name="job_id" required>
@@ -14,25 +14,25 @@
         </div>
         <div class="mb-3">
             <label for="user_id" class="form-label">Assigned to User</label>
-            <select class="form-select" id="user_id" name="user_id">
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.first_name }}  {{  user.last_name }}</option>
-            {% endfor %}
+            <select class="form-select" id="user_id" name="user_id" required>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="mb-3">
             <label for="difficulty" class="form-label">Difficulty</label>
-            <select class="form-select" id="difficulty" name="difficulty">
+            <select class="form-select" id="difficulty" name="difficulty" required>
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="estimatetime" class="form-label">Estimated Time</label>
+            <label for="estimatetime" class="form-label">Estimated Time (hours)</label>
             <input type="number" class="form-control" id="estimatetime" name="estimatetime" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger w-100 mt-3">Submit</button>
     </form>
 </div>
 {% endblock %}

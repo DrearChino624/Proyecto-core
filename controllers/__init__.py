@@ -6,3 +6,6 @@ from .bonificacion_controller import bonificacion_blueprint
 from .status_controller import status_blueprint
 from .reports_controller import reports_blueprint
 from .efficiency_controller import efficiency_blueprint
+from .penalizacion_controller import penalizacion_blueprint
+from .user_reports_controller import user_report_blueprint
+from .user_status_controller import user_status_blueprint

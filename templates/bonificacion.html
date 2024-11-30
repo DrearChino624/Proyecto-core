@@ -2,18 +2,18 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Bonificaciones por Tareas</h2>
+    <h2 class="text-center text-danger mb-5">Bonificaciones por Tareas</h2>
     <div class="row">
         {% for user_id, details in user_task.items() %}
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    {{ details.user }}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <strong>{{ details.user }}</strong>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Tareas Completadas</h5>
-                    <p>Tareas completadas antes de tiempo: {{ details.cycle_done_early }}</p>
-                    <table class="table">
+                    <p class="mb-2">Tareas completadas antes de tiempo: <strong>{{ details.cycle_done_early }}</strong></p>
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Tarea</th>
@@ -28,7 +28,7 @@
                                 <td>{{ task.bonificacion }}%</td>
                                 <td>
                                     {% if task.dolar is not none %}
-                                        ${{ task.dolar | round(2) }}
+                                        ${{ task.dolar }}
                                     {% else %}
                                         N/A
                                     {% endif %}
@@ -37,26 +37,29 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <p>Total Bonificaciones: {{ details.total_bonificacion }}%</p>
-                    <p>Total Dólares: 
+                    <p><strong>Total Bonificaciones:</strong> {{ details.total_bonificacion }}%</p>
+                    <p><strong>Total Dólares:</strong> 
                         {% if details.total_dolar is not none %}
                             ${{ details.total_dolar | round(2) }}
                         {% else %}
                             N/A
                         {% endif %}
                     </p>
+                    
                     {% if details.show_bonus_7 %}
-                    <div class="alert alert-success" role="alert">
-                        Bonus adicional: 5% extra por completar 7 o más tareas antes de tiempo!
+                    <div class="alert alert-success mt-3" role="alert">
+                        <strong>Bonus adicional:</strong> 5% extra por completar 7 o más tareas antes de tiempo!
                     </div>
                     {% endif %}
                     {% if details.show_bonus_21 %}
-                    <div class="alert alert-success" role="alert">
-                        Bonus adicional: 10% extra por completar 21 o más tareas antes de tiempo!
+                    <div class="alert alert-success mt-3" role="alert">
+                        <strong>Bonus adicional:</strong> 10% extra por completar 21 o más tareas antes de tiempo!
                     </div>
                     {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+</div>
 {% endblock %}

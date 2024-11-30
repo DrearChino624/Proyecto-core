@@ -2,49 +2,97 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Edit Task</h2>
-    <form action="/tasks/{{ task.id }}/edit" method="POST">
+    <h2 class="text-center text-primary mb-4">Edit Task</h2>
+    <form action="/tasks/{{ task.id }}/edit" method="POST" class="needs-validation" novalidate>
+        <!-- Job ID -->
         <div class="mb-3">
             <label for="job_id" class="form-label">Job ID</label>
             <input type="text" class="form-control" id="job_id" name="job_id" value="{{ task.job_id }}" required>
+            <div class="invalid-feedback">
+                Please provide a Job ID.
+            </div>
         </div>
+        <!-- Task Description -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <input type="text" class="form-control" id="description" name="description" value="{{ task.description }}" required>
+            <div class="invalid-feedback">
+                Please provide a description.
+            </div>
         </div>
+        <!-- Assigned User -->
         <div class="mb-3">
             <label for="user_id" class="form-label">Assigned to User</label>
-            <select class="form-select" id="user_id" name="user_id">
-            {% for user in users %}
-                <option value="{{ user.id }}" {{ 'selected' if task.user_id == user.id else '' }}>{{ user.first_name }}  {{  user.last_name }}</option>
-            {% endfor %}
+            <select class="form-select" id="user_id" name="user_id" required>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {{ 'selected' if task.user_id == user.id else '' }}>{{ user.first_name }}  {{  user.last_name }}</option>
+                {% endfor %}
             </select>
+            <div class="invalid-feedback">
+                Please select a user.
+            </div>
         </div>
+        <!-- Difficulty Level -->
         <div class="mb-3">
             <label for="difficulty" class="form-label">Difficulty</label>
-            <select class="form-select" id="difficulty" name="difficulty">
+            <select class="form-select" id="difficulty" name="difficulty" required>
                 <option value="Easy" {{ 'selected' if task.difficulty == 'Easy' else '' }}>Easy</option>
                 <option value="Medium" {{ 'selected' if task.difficulty == 'Medium' else '' }}>Medium</option>
                 <option value="Hard" {{ 'selected' if task.difficulty == 'Hard' else '' }}>Hard</option>
             </select>
+            <div class="invalid-feedback">
+                Please select a difficulty level.
+            </div>
         </div>
+        <!-- Task Status -->
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select class="form-select" id="status" name="status">
-                {% for statu in status  %}
+            <select class="form-select" id="status" name="status" required>
+                {% for statu in status %}
                     <option value="{{ statu.id }}" {{ 'selected' if task.status_id == statu.id else '' }}>{{ statu.status_description }}</option>
                 {% endfor %}
             </select>
+            <div class="invalid-feedback">
+                Please select a status.
+            </div>
         </div>
+        <!-- Estimated Time -->
         <div class="mb-3">
             <label for="estimatetime" class="form-label">Estimated Time</label>
             <input type="number" class="form-control" id="estimatetime" name="estimatetime" value="{{ task.estimatetime }}" required>
+            <div class="invalid-feedback">
+                Please provide an estimated time.
+            </div>
         </div>
+        <!-- Time to Complete -->
         <div class="mb-3">
-            <label for="estimatetime" class="form-label">Time to complete</label>
-            <input type="number" class="form-control" id="donetime" name="donetime" value="{{ task.donetime }}" >
+            <label for="donetime" class="form-label">Time to Complete</label>
+            <input type="number" class="form-control" id="donetime" name="donetime" value="{{ task.donetime }}">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success w-100">Update Task</button>
     </form>
 </div>
+
+<script>
+    // Bootstrap form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 {% endblock %}

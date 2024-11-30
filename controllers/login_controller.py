@@ -12,7 +12,7 @@ login_blueprint = Blueprint('login', __name__)
 def login():
     if current_user.is_authenticated:
         # return redirect(url_for('main.dashboard'))
-        return render_template('base.html')
+        return redirect(url_for('base.html'))
 
     if request.method == 'POST':
         username = request.form['username']
@@ -22,7 +22,7 @@ def login():
         if user and password == user.password:  # check_password_hash(user.password, password):
             if user.role == 'ROLE_USER':
                 flash('You do not have permission to access this page')
-                return redirect(url_for('login.login'))
+                return redirect(url_for('base.html'))
             login_user(user)
             # return redirect(url_for('main.dashboard'))  # Adjust to your main page's route
             # return redirect('Location: /users')

@@ -44,20 +44,23 @@ app.register_blueprint(task_blueprint)
 from controllers import bonificacion_blueprint
 app.register_blueprint(bonificacion_blueprint)
 
+from controllers import penalizacion_blueprint
+app.register_blueprint(penalizacion_blueprint)
+
 # Import the status blueprint
 from controllers import status_blueprint
 app.register_blueprint(status_blueprint)
 
+# Import the status blueprint
+from controllers import user_report_blueprint
+app.register_blueprint(user_report_blueprint)
+
+from controllers import user_status_blueprint
+app.register_blueprint(user_status_blueprint)
+
 # Import the reports blueprint
 from controllers import reports_blueprint
 app.register_blueprint(reports_blueprint)
-
-# Import the efficiency blueprint
-from controllers import efficiency_blueprint
-app.register_blueprint(efficiency_blueprint)
-
-
-
 
 
 if __name__ == "__main__":

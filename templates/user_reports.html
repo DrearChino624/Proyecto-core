@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-4">Reporte de Tareas de Usuario</h2>
+
+    <form method="get" action="/user_reports" class="mb-4">
+        <div class="form-group">
+            <label for="user_id" class="form-label">Seleccionar Usuario:</label>
+            <select name="user_id" id="user_id" class="form-control">
+                <option value="">--Seleccionar Usuario--</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == selected_user_id %}selected{% endif %}>{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger mt-3">Filtrar</button>
+    </form>
+
+    {% if user %}
+        <h3 class="text-center text-danger mb-4">Reporte de Tareas para {{ user.first_name }} {{ user.last_name }}</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="table-danger">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tareas Completadas</th>
+                    <th>Tareas por Hacer</th>
+                    <th>Tareas en Progreso</th>
+                    <th>Tareas Completadas Antes de Tiempo</th>
+                    <th>Tareas Completadas Tarde</th>
+                    <th>Bonificación Total (USD)</th>
+                    <th>Penalización Total (USD)</th>
+                    <th>Resultado Final (USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ completed_tasks }}</td>
+                    <td>{{ pending_tasks }}</td>
+                    <td>{{ in_progress_tasks }}</td>
+                    <td>{{ completed_early }}</td>
+                    <td>{{ completed_late }}</td>
+                    <td>{{ total_bonus }}</td>
+                    <td>{{ total_penalty }}</td>
+                    <td>{{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

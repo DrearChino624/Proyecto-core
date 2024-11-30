@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-4">Estados de Usuarios</h2>
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Assigned to</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Penalty/Bonus</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr class="{% if task.status_description == 'Completed' %}table-success{% elif task.status_description == 'In Progress' %}table-warning{% else %}table-danger{% endif %}">
+                    <td>{{ task.first_name if task.first_name else 'Unassigned' }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.difficulty }}</td>
+                    <td>{{ task.status_description }}</td>
+                    <td>{{ task.penalty_or_bonus }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

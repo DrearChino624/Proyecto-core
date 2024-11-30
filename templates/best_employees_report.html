@@ -1,13 +1,11 @@
-<!-- templates/best_employees_report.html -->
-
 {% extends 'base.html' %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Reporte de Mejores Empleados</h2>
-    <form method="get" action="/report">
+    <h2 class="text-center text-danger mb-4">Reporte de Mejores Empleados</h2>
+    <form method="get" action="/report" class="mb-4">
         <div class="form-group">
-            <label for="job_id">Seleccionar Job:</label>
+            <label for="job_id" class="form-label">Seleccionar Job:</label>
             <select name="job_id" id="job_id" class="form-control">
                 <option value="">--Seleccionar Job--</option>
                 {% for job in jobs %}
@@ -15,18 +13,19 @@
                 {% endfor %}
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Filtrar</button>
+        <button type="submit" class="btn btn-danger mt-3">Filtrar</button>
     </form>
 
     {% if report %}
-        <h3 class="mt-5">Mejores Empleados para el Job: {{ report[0].job_name }}</h3>
-        <table class="table">
-            <thead>
+        <h3 class="text-center text-danger mb-4">Mejores Empleados para el Job: {{ report[0].job_name }}</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="table-danger">
                 <tr>
                     <th>Empleado</th>
                     <th>Tareas Fácil</th>
                     <th>Tareas Medio</th>
                     <th>Tareas Difícil</th>
+                    <th>Total Promedio en Horas</th>
                     <th>Total Tareas</th>
                     <th>Puntaje Total</th>
                 </tr>
@@ -38,6 +37,7 @@
                     <td>{{ employee.easy }}</td>
                     <td>{{ employee.medium }}</td>
                     <td>{{ employee.hard }}</td>
+                    <td>{{ employee.avg }}</td>
                     <td>{{ employee.total }}</td>
                     <td>{{ employee.score }}</td>
                 </tr>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-5">Penalizaciones por Tareas</h2>
+    <div class="row">
+        {% for user_id, details in user_task.items() %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <strong>{{ details.user }}</strong>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Tareas Retrasadas</h5>
+                    <p class="mb-2">Tareas completadas fuera de tiempo: <strong>{{ details.delayed }}</strong></p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tarea</th>
+                                <th>Penalización</th>
+                                <th>Dólares</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in details.tasks %}
+                            <tr>
+                                <td>{{ task.task }}</td>
+                                <td>-{{ task.penalizacion }}%</td>
+                                <td>
+                                    {% if task.dolar is not none %}
+                                       -${{ task.dolar }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p><strong>Total Penalizaciones:</strong> -{{ details.total_penalizacion }}%</p>
+                    <p><strong>Total Dólares:</strong> 
+                        
+                        -{% if details.total_dolar is not none %}
+                            ${{ details.total_dolar | round(2) }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

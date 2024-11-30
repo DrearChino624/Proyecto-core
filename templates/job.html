@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Jobs List</h2>
-    <table class="table">
-        <thead>
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-4">Jobs List</h2>
+    
+    <a href="/jobs/new" class="btn btn-danger mb-3">Add New Job</a>
+    
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-danger">
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Actions</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,15 +24,16 @@
                 <td>{{ job.initdate }}</td>
                 <td>{{ job.enddate }}</td>
                 <td>
-                    <a href="/jobs/{{ job.id }}/edit" class="btn btn-primary">Edit</a>
-                    <form action="/jobs/{{ job.id }}/delete" method="post" style="display: inline;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <span class="d-flex">
+                        <a href="/jobs/{{ job.id }}/edit" class="btn btn-warning btn-sm me-2">Edit</a>
+                        <form action="/jobs/{{ job.id }}/delete" method="post" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </span>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="/jobs/new" class="btn btn-success">Add New Job</a>
 </div>
 {% endblock %}

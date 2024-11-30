@@ -27,6 +27,8 @@ def report_best_employees():
                         'easy': 0,
                         'medium': 0,
                         'hard': 0,
+                        'total_hours' : 0,
+                        'avg' : 0,
                         'total': 0,
                         'score': 0  # New field to keep track of the weighted score
                     }
@@ -42,6 +44,13 @@ def report_best_employees():
                     employees[user.id]['score'] += 3  # Hard task = 3 points
                 
                 employees[user.id]['total'] += 1
+                employees[user.id]['total_hours'] += task.donetime
+
+        for employee in employees.values():
+            if employee['total'] > 0:
+                employee['avg'] = round(employee['total_hours'] / employee['total'], 2)
+        
+
         
         sorted_employees = sorted(employees.values(), key=lambda e: e['score'], reverse=True)
         best_employee = sorted_employees[0] if sorted_employees else None
