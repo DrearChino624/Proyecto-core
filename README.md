@@ -1,61 +1,60 @@
-Web Engineering - User Management System
-This project forms the foundational phase of system development, integrating essential functionalities that allow users to interact effectively with the platform. It supports user registration, login, and extensive user management features. Authenticated users can perform CRUD (Create, Read, Update, Delete) operations on user data, delivering a robust and efficient user management experience.
+Ingeniería web - Sistema de gestión de usuarios
+Este proyecto constituye la fase fundamental del desarrollo del sistema, integrando funcionalidades esenciales que permiten a los usuarios interactuar de manera eficaz con la plataforma. Admite el registro de usuarios, el inicio de sesión y amplias funciones de gestión de usuarios. Los usuarios autenticados pueden realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en los datos de los usuarios, lo que ofrece una experiencia de gestión de usuarios sólida y eficiente.
 
-Introduction
-This web application represents a comprehensive solution designed to manage and secure user data effectively. Utilizing Flask as the server framework and SQLite for database management, this project focuses on creating a secure environment where user interactions are both safe and efficient. The system employs hashed passwords and cookies to ensure that routes and user sessions are securely managed, providing a reliable and user-friendly interface for administrative tasks.
+Introducción
+Esta aplicación web representa una solución integral diseñada para gestionar y proteger los datos de los usuarios de manera eficaz. Utilizando Flask como marco de servidor y SQLite para la gestión de bases de datos, este proyecto se centra en la creación de un entorno seguro donde las interacciones de los usuarios sean seguras y eficientes. El sistema emplea contraseñas con hash y cookies para garantizar que las rutas y las sesiones de los usuarios se gestionen de forma segura, lo que proporciona una interfaz fiable y fácil de usar para las tareas administrativas.
 
-Technologies Being Used
+Tecnologías utilizadas
 Backend
-Flask: Serves as the backbone of the web application, handling requests and responses, routing, and server-side logic.
-SQLite: Used for database management, it stores and retrieves all user data as requested by the application logic, ensuring robust data handling.
-Frontend
-The project utilizes HTML, CSS, and JavaScript to deliver a responsive and intuitive user interface, providing users with a seamless interaction experience.
+Flask: actúa como columna vertebral de la aplicación web, gestionando solicitudes y respuestas, enrutamiento y lógica del lado del servidor.
+SQLite: se utiliza para la gestión de bases de datos, almacena y recupera todos los datos de los usuarios según lo solicitado por la lógica de la aplicación, lo que garantiza un manejo sólido de los datos.
+Interfaz de usuario
+El proyecto utiliza HTML, CSS y JavaScript para ofrecer una interfaz de usuario intuitiva y con capacidad de respuesta, lo que proporciona a los usuarios una experiencia de interacción fluida.
 
-Security
-Hashed Passwords: To enhance security, the application implements hashed passwords, ensuring that user credentials are stored securely in the database.
-Cookies: Used for managing sessions and maintaining user state across different pages of the application.
-Packages
-Flask-Login: Manages user authentication, providing tools for logging in and out users from the application.
-Flask-Migrate: Used for handling SQLAlchemy database migrations for Flask applications.
-Flask-Bcrypt: Provides hashing utilities for Flask applications to help safely store user passwords.
-MVC Architecture
-The project follows the MVC (Model-View-Controller) architectural pattern, which separates the application logic into three interconnected components. This pattern helps in organizing the codebase, making it more modular and easier to maintain.
+Seguridad
+Contraseñas cifradas: para mejorar la seguridad, la aplicación implementa contraseñas cifradas, lo que garantiza que las credenciales de usuario se almacenen de forma segura en la base de datos.
+Cookies: se utilizan para gestionar sesiones y mantener el estado del usuario en las distintas páginas de la aplicación.
+Paquetes
+Flask-Login: gestiona la autenticación de usuarios y proporciona herramientas para iniciar y cerrar la sesión de los usuarios en la aplicación.
+Flask-Migrate: se utiliza para gestionar las migraciones de bases de datos SQLAlchemy para aplicaciones Flask.
+Flask-Bcrypt: proporciona utilidades de cifrado para aplicaciones Flask para ayudar a almacenar de forma segura las contraseñas de los usuarios.
+Arquitectura MVC
+El proyecto sigue el patrón arquitectónico MVC (modelo-vista-controlador), que separa la lógica de la aplicación en tres componentes interconectados. Este patrón ayuda a organizar la base de código, lo que la hace más modular y fácil de mantener.
 
 ![alt text](image.png)
 
-Model
-The Model represents the data layer of the application. It defines the structure of the database and includes the logic for retrieving and storing data.
+Modelo
+El modelo representa la capa de datos de la aplicación. Define la estructura de la base de datos e incluye la lógica para recuperar y almacenar datos.
 
-Models: User, Task, Job, Status
-Database: SQLite
+Modelos: Usuario, Tarea, Trabajo, Estado
+Base de datos: SQLite
 
-View
-The View represents the presentation layer of the application. It is responsible for rendering the user interface and displaying the data retrieved from the model.
+Vista
+La Vista representa la capa de presentación de la aplicación. Es responsable de representar la interfaz de usuario y mostrar los datos recuperados del modelo.
 
-Templates: HTML files that render the user interface (e.g., users.html, jobs.html, tasks.html, bonificacion.html)
+Plantillas: Archivos HTML que representan la interfaz de usuario (por ejemplo, users.html, jobs.html, task.html, bonificacion.html)
 
-Controller
-The Controller handles the input from the user, processes it, and returns the appropriate output. It acts as an intermediary between the Model and the View.
+Controlador
+El Controlador maneja la entrada del usuario, la procesa y devuelve la salida apropiada. Actúa como intermediario entre el Modelo y la Vista.
 
-Controllers: user_controller.py, task_controller.py, job_controller.py, status_controller.py, bonificacion_controller.py, login_controller.py
+Controladores: user_controller.py, task_controller.py, job_controller.py, status_controller.py, bonificacion_controller.py, login_controller.py
 
-Routes --> app.py
-Routes define the URL patterns and map them to the respective controllers. They determine what code to execute when a user accesses a specific URL.
+Rutas --> app.py
+Las rutas definen los patrones de URL y los asignan a los respectivos controladores. Determinan qué código ejecutar cuando un usuario accede a una URL específica.
 
-
-Login
-This version substantially enhances the security framework of the system by integrating a sophisticated login mechanism. Instead of using JWT, this system employs hashed passwords for verifying user credentials, ensuring that stored passwords are not in plain text, thereby fortifying the security against unauthorized access.
+Iniciar sesión
+Esta versión mejora sustancialmente el marco de seguridad del sistema al integrar un sofisticado mecanismo de inicio de sesión. En lugar de utilizar JWT, este sistema emplea contraseñas cifradas para verificar las credenciales de los usuarios, lo que garantiza que las contraseñas almacenadas no estén en texto sin formato, lo que refuerza la seguridad contra el acceso no autorizado.
 
 ![alt text](image-1.png)
 
-To login:
+Para iniciar sesión:
 
-user: admin
-password: admin
+usuario: admin
+contraseña: admin
 
-Admin
-Admin Dashboard
-The Admin has the capability to perform CRUD operations on Users, Jobs, Tasks, and Bonifications. Each section (Users, Jobs, Tasks, Bonifications) will have its own interface for creating, reading, updating, and deleting entries.
+Administrador
+Panel de control del administrador
+El administrador tiene la capacidad de realizar operaciones CRUD en usuarios, trabajos, tareas y bonificaciones. Cada sección (usuarios, trabajos, tareas, bonificaciones) tendrá su propia interfaz para crear, leer, actualizar y eliminar entradas.
 
 ![alt text](image-2.png)
 
